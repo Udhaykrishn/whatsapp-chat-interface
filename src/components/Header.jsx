@@ -3,7 +3,7 @@
 import { BiSolidVideo } from "react-icons/bi";
 import { IoCallOutline } from "react-icons/io5";
 import { FiMoreVertical } from "react-icons/fi";
-import js from "../../public/images/js.png"
+import js from "../../public/js.png"
 
 const Header = () => {
   return (

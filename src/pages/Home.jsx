@@ -1,11 +1,18 @@
-import React from 'react'
+import Header from "../components/Header";
+import Body from "../components/Body";
+import Footer from "../components/Footer";
+import { AppProvider } from "../components/AppContext";
 
 const Home = () => {
   return (
-    <div>
-        <h2 className='text-3xl text-black'>This is Home Page</h2>
-    </div>
-  )
-}
+    <AppProvider>
+    <>
+      <Header />
+      <Body />
+      <Footer />
+    </>
+    </AppProvider>
+  );
+};
 
-export default Home
+export default Home;
