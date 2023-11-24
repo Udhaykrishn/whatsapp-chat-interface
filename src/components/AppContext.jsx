@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 // AppContext.js
 import { createContext, useContext, useState } from 'react';
 

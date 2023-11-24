@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { BsEmojiSmileFill } from "react-icons/bs";
 import { LuSend } from "react-icons/lu";
 import { ImAttachment } from "react-icons/im";
@@ -13,7 +13,14 @@ const Footer = () => {
 
   const handleClick = () => {
     if (inputText.trim() !== "") {
-      const updatedItems = [...items, inputText];
+      const now = new Date();
+      const hours = now.getHours();
+      const minutes = now.getMinutes();
+      const amOrPm = hours >= 12 ? 'PM' : 'AM';
+      const formattedHours = (hours % 12 || 12).toString().padStart(2, '0');
+      const formattedMinutes = minutes.toString().padStart(2, '0');
+      const currentTime = `${formattedHours}:${formattedMinutes} ${amOrPm}`;
+      const updatedItems = [...items, `${inputText} - ${currentTime}`];
       setItems(updatedItems);
       setSharedData(updatedItems);
       setInputText("");
@@ -22,24 +29,22 @@ const Footer = () => {
 
   const handleChange = (e) => {
     const inputValue = e.target.value;
-    if (inputValue.trim() !== "") {
-      setInputText(inputValue);
-    }
+    setInputText(inputValue)
   };
 
   return (
     <footer className="fixed bottom-0 overflow-hidden flex items-center justify-between w-full h-20 bg-slate-600">
       <div className="flex items-center justify-between w-full bg-white h-14 rounded-full">
-        <div className="lg:ml-1 ml-2 flex items-center justify-center text-3xl font-bold bg-transparent w-1/12 h-14 hover:animate-spin">
+        <div className="lg:ml-1 ml-2 flex items-center justify-center text-3xl font-bold bg-transparent w-1/12 h-14 ">
           <Link to={"/"}>
-            <BsEmojiSmileFill className="text-gray-600" />
+            <BsEmojiSmileFill className="hover:animate-spin text-gray-600" />
           </Link>
         </div>
 
         <div className="ml-2 sm:ml-3 md:mr-4 lg:ml-1 w-8/12 rounded-xl h-full flex items-center top-0">
           <input
             type="text"
-            className="outline-none w-full h-3/4 text-2xl placeholder:text-2xl outline-0"
+            className="outline-none w-full h-3/4 text-sm placeholder:text-sm outline-0"
             placeholder="Message"
             value={inputText}
             onChange={handleChange}
@@ -47,9 +52,9 @@ const Footer = () => {
         </div>
 
         <div className="ml-4 md:ml-4 overflow-hidden flex items-center justify-evenly w-4/12 h-full rounded-lg">
-          <div className="hover:animate-ping text-gray-600 text-3xl w-10 h-full flex items-center justify-end md:ml-16">
+          <div className=" text-gray-600 text-3xl w-10 h-full flex items-center justify-end md:ml-16">
             <Link>
-              <ImAttachment />
+              <ImAttachment className="hover:animate-ping" />
             </Link>
           </div>
           <div className="text-gray-600 text-3xl w-10 h-full flex items-center justify-center">
@@ -60,9 +65,9 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="ml-4 mr-4 hover:animate-pulse w-20 h-16 overflow-hidden bg-green-400 rounded-full flex justify-center items-center text-3xl">
+      <div className="ml-4 mr-4  w-20 h-16 overflow-hidden bg-green-400 rounded-full flex justify-center items-center text-3xl">
         <button onClick={handleClick}>
-          <LuSend className="text-white" />
+          <LuSend className="text-white hover:animate-pulse" />
         </button>
       </div>
     </footer>
